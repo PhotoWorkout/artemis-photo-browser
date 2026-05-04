@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Artemis II Photo Archive — Browser</title>
+<meta name="description" content="Browse NASA's full Artemis II photo archive — Earthsets, lunar surface close-ups, crew portraits, and the first solar eclipse photographed from cislunar space. Public-domain imagery via the NASA Image Library API.">
+<link rel="preconnect" href="https://images-api.nasa.gov">
+<link rel="preconnect" href="https://images-assets.nasa.gov">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header class="apb-header">
+  <h1>Artemis II Photo Archive</h1>
+  <p class="apb-sub">Browse NASA's lunar-flyby imagery — Earthsets, lunar surface close-ups, crew portraits. Public-domain via NASA Image Library.</p>
+
+  <form class="apb-search" id="apb-search-form" autocomplete="off">
+    <input type="search" id="apb-q" name="q" placeholder="Search Artemis II photos (default: all)" aria-label="Search Artemis II photos">
+    <button type="submit" id="apb-go">Search</button>
+  </form>
+</header>
+
+<div id="apb-status" class="apb-status" role="status" aria-live="polite"></div>
+
+<main class="apb-grid" id="apb-grid" aria-label="Photo grid"></main>
+
+<nav class="apb-pager" id="apb-pager" aria-label="Pagination">
+  <button id="apb-prev" type="button" disabled>&larr; Previous</button>
+  <span id="apb-page-info" class="apb-page-info">—</span>
+  <button id="apb-next" type="button" disabled>Next &rarr;</button>
+</nav>
+
+<footer class="apb-footer">
+  <p>
+    Photos &copy; NASA — public domain under
+    <a href="https://www.nasa.gov/nasa-brand-center/images-and-media/" target="_blank" rel="noopener">NASA media usage</a>.
+    Powered by the
+    <a href="https://api.nasa.gov/" target="_blank" rel="noopener">NASA Image Library API</a>.
+    Built by <a href="https://www.photoworkout.com/" target="_blank" rel="noopener">PhotoWorkout</a>.
+  </p>
+</footer>
+
+<!-- Lightbox -->
+<div class="apb-lightbox" id="apb-lightbox" role="dialog" aria-label="Photo detail" hidden>
+  <button class="apb-lightbox__close" id="apb-lightbox-close" aria-label="Close">&times;</button>
+  <button class="apb-lightbox__nav apb-lightbox__prev" id="apb-lightbox-prev" aria-label="Previous photo">&lsaquo;</button>
+  <button class="apb-lightbox__nav apb-lightbox__next" id="apb-lightbox-next" aria-label="Next photo">&rsaquo;</button>
+  <figure class="apb-lightbox__inner">
+    <img id="apb-lightbox-img" src="" alt="">
+    <figcaption class="apb-lightbox__cap">
+      <h2 id="apb-lightbox-title"></h2>
+      <p class="apb-lightbox__meta">
+        <span id="apb-lightbox-date"></span>
+        <span class="apb-dot" aria-hidden="true">·</span>
+        <span id="apb-lightbox-photographer"></span>
+      </p>
+      <p class="apb-lightbox__desc" id="apb-lightbox-desc"></p>
+      <p class="apb-lightbox__links">
+        <a id="apb-lightbox-nasa" href="#" target="_blank" rel="noopener">View on NASA &rarr;</a>
+        <a id="apb-lightbox-orig" href="#" target="_blank" rel="noopener">Download original</a>
+      </p>
+    </figcaption>
+  </figure>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>
