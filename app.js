@@ -19,6 +19,10 @@
     const ASSETS_BASE = 'https://images-assets.nasa.gov/image';
     const PAGE_SIZE = 24;
     const DEFAULT_QUERY = 'Artemis II';
+    // Filter to mission-year photos by default — surfaces the in-flight imagery
+    // (Earthsets, lunar close-ups, crew portraits) instead of pre-launch ground
+    // shots which dominate the unfiltered "Artemis II" keyword search.
+    const DEFAULT_YEAR_START = '2026';
 
     const $ = (id) => document.getElementById(id);
     const els = {
@@ -89,6 +93,12 @@
         url.searchParams.set('media_type', 'image');
         url.searchParams.set('page', String(page));
         url.searchParams.set('page_size', String(PAGE_SIZE));
+        // Surface in-flight imagery first when the user hasn't customized the search.
+        // (Drop the year filter if they typed a custom query — let them search the
+        // full archive including pre-launch content.)
+        if (query === DEFAULT_QUERY) {
+            url.searchParams.set('year_start', DEFAULT_YEAR_START);
+        }
 
         let resp;
         try {
